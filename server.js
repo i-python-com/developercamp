@@ -1,5 +1,6 @@
 const express = require('express')
 const connectDB = require('./config/db.js')
+const cors = require('cors')
 
 const app = express()
 
@@ -8,6 +9,7 @@ connectDB()
 
 // Init middleware
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => res.send('Api running...'))
 
