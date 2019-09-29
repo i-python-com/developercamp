@@ -101,6 +101,8 @@ const AddExperience = ({ addExperience, history }) => {
             name="description"
             cols="30"
             rows="5"
+            value={description}
+            onChange={onChange}
             placeholder="Job Description"
           ></textarea>
         </div>
