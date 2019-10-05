@@ -12,8 +12,6 @@ connectDB()
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => res.send('Api running...'))
-
 // Define routes
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
