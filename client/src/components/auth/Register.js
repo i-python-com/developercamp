@@ -21,13 +21,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault()
     if (password !== password2) {
-      setAlert('Password do not match', 'danger')
+      setAlert('Passwords do not match', 'danger')
     } else {
       register({ name, email, password })
     }
   }
 
-  // Redirect to "/dashboard" route path if isAuthenticated
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />
   }
@@ -36,17 +35,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Create Your Account
+        <i className="fas fa-user" /> Create Your Account
       </p>
-      <form className="form" onSubmit={onSubmit}>
+      <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input
             type="text"
             placeholder="Name"
             name="name"
             value={name}
-            onChange={onChange}
-            // required
+            onChange={e => onChange(e)}
           />
         </div>
         <div className="form-group">
@@ -55,11 +53,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             placeholder="Email Address"
             name="email"
             value={email}
-            onChange={onChange}
-            // required
+            onChange={e => onChange(e)}
           />
           <small className="form-text">
-            This site uses Gravatar, so if you want a profile image, use a
+            This site uses Gravatar so if you want a profile image, use a
             Gravatar email
           </small>
         </div>
@@ -69,8 +66,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             placeholder="Password"
             name="password"
             value={password}
-            onChange={onChange}
-            // minLength="6"
+            onChange={e => onChange(e)}
           />
         </div>
         <div className="form-group">
@@ -79,11 +75,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             placeholder="Confirm Password"
             name="password2"
             value={password2}
-            onChange={onChange}
-            // minLength="6"
+            onChange={e => onChange(e)}
           />
         </div>
-        <input type="submit" value="Register" className="btn btn-primary" />
+        <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
@@ -95,7 +90,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({

@@ -9,13 +9,12 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_PROFILE
-} from '../actions/types'
+} from './types'
 import setAuthToken from '../utils/setAuthToken'
 
-// Load user
+// Load User
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
-    // when dispatch loadUser action, run setAuthToken
     setAuthToken(localStorage.token)
   }
 
@@ -33,7 +32,7 @@ export const loadUser = () => async dispatch => {
   }
 }
 
-// Register user
+// Register User
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {
     headers: {
@@ -58,13 +57,14 @@ export const register = ({ name, email, password }) => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }
+
     dispatch({
       type: REGISTER_FAIL
     })
   }
 }
 
-// Login user
+// Login User
 export const login = (email, password) => async dispatch => {
   const config = {
     headers: {
@@ -89,13 +89,14 @@ export const login = (email, password) => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }
+
     dispatch({
       type: LOGIN_FAIL
     })
   }
 }
 
-// Logout, clear profile
+// Logout / Clear Profile
 export const logout = () => dispatch => {
   dispatch({ type: CLEAR_PROFILE })
   dispatch({ type: LOGOUT })

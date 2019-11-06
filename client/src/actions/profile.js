@@ -23,10 +23,7 @@ export const getCurrentProfile = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -45,10 +42,7 @@ export const getProfiles = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -65,10 +59,7 @@ export const getProfileById = userId => async dispatch => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -85,30 +76,32 @@ export const getGithubRepos = username => async dispatch => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
 
 // Create or update profile
-// history argument used to redirect to client side route, component need withRouter
 export const createProfile = (
   formData,
   history,
   edit = false
 ) => async dispatch => {
   try {
-    const res = await axios.post('/api/profile', formData)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await axios.post('/api/profile', formData, config)
 
     dispatch({
       type: GET_PROFILE,
       payload: res.data
     })
 
-    dispatch(setAlert(edit ? 'Profile updated' : 'Profile created', 'success'))
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'))
 
     if (!edit) {
       history.push('/dashboard')
@@ -122,25 +115,28 @@ export const createProfile = (
 
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
 
-// Add experience
+// Add Experience
 export const addExperience = (formData, history) => async dispatch => {
   try {
-    const res = await axios.put('/api/profile/experience', formData)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await axios.put('/api/profile/experience', formData, config)
 
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data
     })
 
-    dispatch(setAlert('Experience added', 'success'))
+    dispatch(setAlert('Experience Added', 'success'))
 
     history.push('/dashboard')
   } catch (err) {
@@ -152,25 +148,28 @@ export const addExperience = (formData, history) => async dispatch => {
 
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
 
-// Add education
+// Add Education
 export const addEducation = (formData, history) => async dispatch => {
   try {
-    const res = await axios.put('/api/profile/education', formData)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await axios.put('/api/profile/education', formData, config)
 
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data
     })
 
-    dispatch(setAlert('Education added', 'success'))
+    dispatch(setAlert('Education Added', 'success'))
 
     history.push('/dashboard')
   } catch (err) {
@@ -182,10 +181,7 @@ export const addEducation = (formData, history) => async dispatch => {
 
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -200,14 +196,11 @@ export const deleteExperience = id => async dispatch => {
       payload: res.data
     })
 
-    dispatch(setAlert('Experience removed', 'success'))
+    dispatch(setAlert('Experience Removed', 'success'))
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -222,14 +215,11 @@ export const deleteEducation = id => async dispatch => {
       payload: res.data
     })
 
-    dispatch(setAlert('Education removed', 'success'))
+    dispatch(setAlert('Education Removed', 'success'))
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
@@ -247,10 +237,7 @@ export const deleteAccount = () => async dispatch => {
     } catch (err) {
       dispatch({
         type: PROFILE_ERROR,
-        payload: {
-          msg: err.response.statusText,
-          status: err.response.status
-        }
+        payload: { msg: err.response.statusText, status: err.response.status }
       })
     }
   }

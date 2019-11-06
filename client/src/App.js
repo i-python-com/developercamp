@@ -12,16 +12,14 @@ import setAuthToken from './utils/setAuthToken'
 
 import './App.css'
 
-// Set every time when webpage refresh
 if (localStorage.token) {
   setAuthToken(localStorage.token)
 }
 
 const App = () => {
   useEffect(() => {
-    // When App mounted, dispath the action loadUser
     store.dispatch(loadUser())
-  }, []) // If no [], dispatch every time when state change
+  }, [])
 
   return (
     <Provider store={store}>

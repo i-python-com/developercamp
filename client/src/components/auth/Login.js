@@ -20,7 +20,6 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password)
   }
 
-  // Redirect to "/dashboard" route path if isAuthenticated
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />
   }
@@ -29,16 +28,17 @@ const Login = ({ login, isAuthenticated }) => {
     <Fragment>
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Sign Into Your Account
+        <i className="fas fa-user" /> Sign Into Your Account
       </p>
-      <form className="form" onSubmit={onSubmit}>
+      <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input
             type="email"
             placeholder="Email Address"
             name="email"
             value={email}
-            onChange={onChange}
+            onChange={e => onChange(e)}
+            required
           />
         </div>
         <div className="form-group">
@@ -47,11 +47,11 @@ const Login = ({ login, isAuthenticated }) => {
             placeholder="Password"
             name="password"
             value={password}
-            onChange={onChange}
+            onChange={e => onChange(e)}
             minLength="6"
           />
         </div>
-        <input type="submit" value="Login" className="btn btn-primary" />
+        <input type="submit" className="btn btn-primary" value="Login" />
       </form>
       <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
@@ -62,7 +62,7 @@ const Login = ({ login, isAuthenticated }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
