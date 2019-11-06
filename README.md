@@ -67,7 +67,8 @@ Password: test369
 
 # Run it at local
 
-1. git clone https://github.com/i-python-com/devconnector.git
-2. cd devconnector/
-3. npm install
-4. npm run dev
+1. git clone https://github.com/i-python-com/developercamp.git
+2. cd developercamp/
+3. update "mongoURI" string in /config/default.json
+4. npm install
+5. npm run dev
